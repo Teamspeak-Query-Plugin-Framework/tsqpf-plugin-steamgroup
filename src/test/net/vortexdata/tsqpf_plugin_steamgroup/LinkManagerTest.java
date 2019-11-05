@@ -6,6 +6,7 @@ import org.junit.*;
 import org.junit.Assert.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class LinkManagerTest {
 
@@ -21,7 +22,7 @@ public class LinkManagerTest {
         try {
             assertEquals(12345, linkManager.getPin("https://steamcommunity.com/id/taxset/"));
         } catch (TempLinkNotFoundException e) {
-            e.printStackTrace();
+            fail();
         }
     }
 

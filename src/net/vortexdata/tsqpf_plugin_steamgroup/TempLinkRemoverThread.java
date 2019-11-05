@@ -21,6 +21,12 @@ public class TempLinkRemoverThread implements Runnable {
     @Override
     public void run() {
 
+        try {
+            Thread.sleep(sleep);
+        } catch (InterruptedException e) {
+
+        }
+
         BufferedReader br = null;
         BufferedWriter bw = null;
         ArrayList<String> validLinks = new ArrayList<>();
@@ -36,16 +42,18 @@ public class TempLinkRemoverThread implements Runnable {
                     break;
 
                 String[] link = currentLine.split(";");
-                if (Integer.parseInt(link[2]) < System.currentTimeMillis() - 600000) {
-                    // Delete link
+                if (Long.parseLong(link[2]) < System.currentTimeMillis() - 5000) {
+                    System.out.println("Skipped line");
                 } else {
                     validLinks.add(currentLine);
+                    System.out.println("Saved line");
                 }
             }
 
             BufferedWriter bwr = new BufferedWriter(new FileWriter(path + "templinks.txt"));
             bwr.write("");
             for (String line : validLinks) {
+                System.out.println("Writing line");
                 bw.write(line);
             }
 
@@ -53,12 +61,6 @@ public class TempLinkRemoverThread implements Runnable {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        try {
-            Thread.sleep(sleep);
-        } catch (InterruptedException e) {
-
         }
 
     }

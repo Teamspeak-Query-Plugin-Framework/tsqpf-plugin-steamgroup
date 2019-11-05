@@ -40,6 +40,7 @@ public class LinkManager {
                 fw.write(url + ";" + pin + ";" + System.currentTimeMillis()+ "\n");
                 fw.flush();
                 fw.close();
+                System.out.println("Stored");
                 return true;
             } catch (IOException g) {
                 // Handle
