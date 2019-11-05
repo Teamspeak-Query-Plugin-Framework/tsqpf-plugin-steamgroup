@@ -54,6 +54,7 @@ public class LinkManager {
             }
         }
 
+        return false;
     }
 
     public int getPin(String url) throws TempLinkNotFoundException {
