@@ -30,26 +30,30 @@ public class LinkManager {
 
     public boolean storeLink(String url, int pin) {
 
-        FileWriter fw = null;
         try {
-            fw = new FileWriter(pluginPath + "templinks.txt", true);
-            fw.write(url + ";" + pin + ";" + System.currentTimeMillis()+ "\n");
-            fw.flush();
-            fw.close();
-            return true;
-        } catch (IOException e) {
-            // Handle
-        } finally {
-            if (fw != null) {
-                try {
-                    fw.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+            getPin(url);
+            return false;
+        } catch (TempLinkNotFoundException e) {
+            FileWriter fw = null;
+            try {
+                fw = new FileWriter(pluginPath + "templinks.txt", true);
+                fw.write(url + ";" + pin + ";" + System.currentTimeMillis()+ "\n");
+                fw.flush();
+                fw.close();
+                return true;
+            } catch (IOException g) {
+                // Handle
+            } finally {
+                if (fw != null) {
+                    try {
+                        fw.close();
+                    } catch (IOException g) {
+                        g.printStackTrace();
+                    }
                 }
             }
         }
 
-        return false;
     }
 
     public int getPin(String url) throws TempLinkNotFoundException {
