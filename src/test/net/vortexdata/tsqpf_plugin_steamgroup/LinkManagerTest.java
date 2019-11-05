@@ -1,22 +1,34 @@
 package test.net.vortexdata.tsqpf_plugin_steamgroup;
 
 import net.vortexdata.tsqpf_plugin_steamgroup.*;
+import net.vortexdata.tsqpf_plugin_steamgroup.exceptions.*;
+import org.junit.*;
+import org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 public class LinkManagerTest {
 
-    LinkManager linkManager = new LinkManager();
+    LinkManager linkManager = new LinkManager("https://steamcommunity.com/groups/vortexdatanet", 10000);
 
-    @org.junit.Test
-    public void storeLink() {
-
+    @Test
+    public void testStoreLink() {
+        assertEquals(true, linkManager.storeLink("https://steamcommunity.com/id/taxset/", 12345));
     }
 
-    @org.junit.Test
-    public void getPin() {
+    @Test
+    public void testGetPin() {
+        try {
+            assertEquals(12345, linkManager.getPin("https://steamcommunity.com/id/taxset/"));
+        } catch (TempLinkNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
-    @org.junit.Test
-    public void verifyLink() {
+    @Test
+    public void testVerifyLink() {
+        boolean isVerified = linkManager.verifyLink("https://steamcommunity.com/id/taxset/");
+        assertEquals(true, isVerified);
     }
 
 }
