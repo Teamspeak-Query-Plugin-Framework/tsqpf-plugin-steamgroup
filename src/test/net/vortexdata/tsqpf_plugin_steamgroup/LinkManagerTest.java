@@ -31,4 +31,13 @@ public class LinkManagerTest {
         assertEquals(true, isVerified);
     }
 
+    @Test
+    public void testTempLinkRemover() {
+        try {
+            Thread.sleep(15000);
+        } catch (InterruptedException e) {
+            //
+        }
+    }
+
 }

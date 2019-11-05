@@ -33,7 +33,7 @@ public class LinkManager {
         FileWriter fw = null;
         try {
             fw = new FileWriter(pluginPath + "templinks.txt", true);
-            fw.write(url + ";" + pin + ";" + System.currentTimeMillis());
+            fw.write(url + ";" + pin + ";" + System.currentTimeMillis()+ "\n");
             fw.flush();
             fw.close();
             return true;
