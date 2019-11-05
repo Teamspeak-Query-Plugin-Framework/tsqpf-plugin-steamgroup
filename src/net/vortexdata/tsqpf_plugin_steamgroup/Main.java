@@ -24,7 +24,7 @@ public class Main extends TeamspeakPlugin {
         getConfig().setDefault("messageUnknownError", "An unknown error has occurred. Please contact the server administrator and tell them about this issue.");
         getConfig().saveAll();
 
-        registerChatCommand(new CSteamGroup(getAPI(), getConfig(), linkManager), "!steamgroup");
+        registerChatCommand(new CSteamGroup(getAPI(), getConfig(), linkManager, getLogger()), "!steamgroup");
 
         linkManager = new LinkManager(getConfig().readValue("steamGroupUrl"));
 

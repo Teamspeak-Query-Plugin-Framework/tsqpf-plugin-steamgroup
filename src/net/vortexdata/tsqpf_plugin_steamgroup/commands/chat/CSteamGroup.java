@@ -64,9 +64,7 @@ public class CSteamGroup implements ChatCommandInterface {
 
                 if (command.length >= 3) {
 
-                    new Thread(new LinkCreationCheck(command));
-
-
+                    new Thread(new LinkCreationCheck(command, api, invokerId, config, linkManager, logger));
 
                 } else {
                     api.sendPrivateMessage(invokerId, config.readValue("messageSyntax"));

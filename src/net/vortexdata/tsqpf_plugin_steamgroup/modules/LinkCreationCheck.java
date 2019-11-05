@@ -14,7 +14,7 @@ public class LinkCreationCheck implements Runnable {
     private LinkManager linkManager;
     private PluginLogger logger;
 
-    LinkCreationCheck(String[] command, TS3Api api, int invokerId, PluginConfig config, LinkManager linkManager, PluginLogger logger) {
+    public LinkCreationCheck(String[] command, TS3Api api, int invokerId, PluginConfig config, LinkManager linkManager, PluginLogger logger) {
         this.command = command;
         this.urlValidator = new UrlValidator();
         this.api = api;
