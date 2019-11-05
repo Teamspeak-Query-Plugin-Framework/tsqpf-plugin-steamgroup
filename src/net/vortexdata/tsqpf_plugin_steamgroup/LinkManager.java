@@ -8,10 +8,12 @@ public class LinkManager {
 
     String pluginPath = "plugins//SteamGroup//";
     Thread linkRemoverTask;
+    private String groupUrl = "";
 
-    public LinkManager() {
+    public LinkManager(String groupUrl) {
         linkRemoverTask = new Thread(new TempLinkRemoverThread(pluginPath));
         linkRemoverTask.start();
+        this.groupUrl = groupUrl;
     }
 
     public boolean storeLink(String url, int pin) {
@@ -34,6 +36,13 @@ public class LinkManager {
                 }
             }
         }
+
+        return false;
+    }
+
+    public boolean verifyLink(String url) {
+
+
 
         return false;
     }
