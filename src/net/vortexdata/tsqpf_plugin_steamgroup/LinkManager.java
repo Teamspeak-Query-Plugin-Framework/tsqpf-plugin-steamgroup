@@ -52,13 +52,13 @@ public class LinkManager {
         return false;
     }
 
-    public String getPin(String url) throws TempLinkNotFoundException {
+    public int getPin(String url) throws TempLinkNotFoundException {
         try {
             BufferedReader br = new BufferedReader(new FileReader(pluginPath + "templinks.txt"));
             while (br.ready()) {
                 String cLine = br.readLine();
                 if (cLine.split(";")[0].equalsIgnoreCase(url))
-                    return cLine.split(";")[2];
+                    return Integer.parseInt(cLine.split(";")[1]);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
