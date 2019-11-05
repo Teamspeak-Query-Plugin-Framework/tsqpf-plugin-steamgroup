@@ -12,14 +12,20 @@ public class LinkManager {
     Thread linkRemoverTask;
     private String groupUrl = "";
     private WebCrawler webCrawler;
-    private PluginConfig config;
+    private String steamGroupUrl;
 
-    public LinkManager(String groupUrl, PluginConfig config) {
+    public LinkManager(String groupUrl) {
         linkRemoverTask = new Thread(new TempLinkRemoverThread(pluginPath));
         linkRemoverTask.start();
         this.groupUrl = groupUrl;
         this.webCrawler = new WebCrawler();
-        this.config = config;
+    }
+
+    public LinkManager(String groupUrl, int customTempLinkRemoverInterval) {
+        linkRemoverTask = new Thread(new TempLinkRemoverThread(pluginPath, customTempLinkRemoverInterval));
+        linkRemoverTask.start();
+        this.groupUrl = groupUrl;
+        this.webCrawler = new WebCrawler();
     }
 
     public boolean storeLink(String url, int pin) {
@@ -73,7 +79,7 @@ public class LinkManager {
             return false;
         }
 
-        if (webCrawler.getPageElement(PageElement.GROUPS, url + "/groups/").toString().contains(config.readValue("steamGroupUrl")))
+        if (webCrawler.getPageElement(PageElement.GROUPS, url + "/groups/").toString().contains(groupUrl))
             return true;
 
         return false;

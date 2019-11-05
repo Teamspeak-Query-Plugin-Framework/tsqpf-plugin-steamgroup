@@ -6,9 +6,16 @@ import java.util.ArrayList;
 public class TempLinkRemoverThread implements Runnable {
 
     String path;
+    private int sleep;
+
+    public TempLinkRemoverThread(String path, int interval) {
+        this.path = path;
+        this.sleep = interval;
+    }
 
     public TempLinkRemoverThread(String path) {
         this.path = path;
+        this.sleep = 60000;
     }
 
     @Override
@@ -49,11 +56,15 @@ public class TempLinkRemoverThread implements Runnable {
         }
 
         try {
-            Thread.sleep(60000);
+            Thread.sleep(sleep);
         } catch (InterruptedException e) {
 
         }
 
+    }
+
+    public void setSleep(int milliseconds) {
+        this.sleep = milliseconds;
     }
 
 }
