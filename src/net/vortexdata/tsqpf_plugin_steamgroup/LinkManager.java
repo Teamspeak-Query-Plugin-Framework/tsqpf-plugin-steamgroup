@@ -72,7 +72,7 @@ public class LinkManager {
     public boolean verifyLink(String url) {
 
         try {
-            if (!webCrawler.getPageElement(PageElement.SUMMARY, url).toString().contains(getPin(url)))
+            if (!webCrawler.getPageElement(PageElement.SUMMARY, url).toString().contains(Integer.toString(getPin(url))))
                 return false;
         } catch (TempLinkNotFoundException e) {
             e.printStackTrace();
