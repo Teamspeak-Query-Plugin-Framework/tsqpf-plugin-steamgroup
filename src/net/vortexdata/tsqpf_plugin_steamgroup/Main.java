@@ -13,6 +13,7 @@ public class Main extends TeamspeakPlugin {
 
         getConfig().setDefault("steamGroupUrl", "https://steamcommunity.com/groups/vortexdatanet");
         getConfig().setDefault("linkGroupId", "1");
+        getConfig().setDefault("messageLinkUrlInvalid", "Sorry, but it looks like the URL you entered is not a valid url that belongs to Steam.");
         getConfig().setDefault("messageLinkCreated", "Congratulations! You have now been assigned the steam verified group.");
         getConfig().setDefault("messageLinkClientNotFound", "Sorry, but I couldn't find this username.");
         getConfig().setDefault("messageLinkClientNotVerified", "Sorry, but I couldn't verify that this account belongs to you.");

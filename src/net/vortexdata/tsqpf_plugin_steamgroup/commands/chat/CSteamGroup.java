@@ -6,6 +6,9 @@ import net.vortexdata.tsqpf.listeners.ChatCommandInterface;
 import net.vortexdata.tsqpf.plugins.PluginConfig;
 import net.vortexdata.tsqpf_plugin_steamgroup.modules.*;
 import net.vortexdata.tsqpf_plugin_steamgroup.utils.*;
+import sun.net.util.*;
+
+import java.net.*;
 
 public class CSteamGroup implements ChatCommandInterface {
 
@@ -33,7 +36,15 @@ public class CSteamGroup implements ChatCommandInterface {
                 api.sendPrivateMessage(invokerId, config.readValue("messageGuide"));
             } else if (command[1].equalsIgnoreCase("LINK")) {
 
-                // Check if URL is valid
+                if (command.length >= 3) {
+
+                    // Check if URL is valid
+
+                } else {
+                    api.sendPrivateMessage(invokerId, config.readValue("messageSyntax"));
+                }
+
+
                 String pin = pinGenerator.nextPin();
                 linkManager.storeLink(command[2], pin);
 
