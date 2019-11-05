@@ -1,9 +1,8 @@
 package test.net.vortexdata.tsqpf_plugin_steamgroup;
 
-import net.vortexdata.tsqpf_plugin_steamgroup.*;
 import net.vortexdata.tsqpf_plugin_steamgroup.exceptions.*;
+import net.vortexdata.tsqpf_plugin_steamgroup.modules.*;
 import org.junit.*;
-import org.junit.Assert.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -14,7 +13,7 @@ public class LinkManagerTest {
 
     @Test
     public void testStoreLink() {
-        assertEquals(true, linkManager.storeLink("https://steamcommunity.com/id/taxset/", 12345));
+        assertEquals(true, linkManager.storeLink("https://steamcommunity.com/id/taxset/", "23141243ds"));
     }
 
     @Test

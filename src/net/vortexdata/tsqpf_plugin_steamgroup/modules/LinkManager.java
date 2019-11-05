@@ -1,8 +1,7 @@
-package net.vortexdata.tsqpf_plugin_steamgroup;
+package net.vortexdata.tsqpf_plugin_steamgroup.modules;
 
-import com.github.theholywaffle.teamspeak3.*;
-import net.vortexdata.tsqpf.plugins.*;
 import net.vortexdata.tsqpf_plugin_steamgroup.exceptions.*;
+import net.vortexdata.tsqpf_plugin_steamgroup.webutils.*;
 
 import java.io.*;
 
@@ -28,7 +27,7 @@ public class LinkManager {
         this.webCrawler = new WebCrawler();
     }
 
-    public boolean storeLink(String url, int pin) {
+    public boolean storeLink(String url, String pin) {
 
         try {
             getPin(url);
@@ -58,13 +57,13 @@ public class LinkManager {
         return false;
     }
 
-    public int getPin(String url) throws TempLinkNotFoundException {
+    public String getPin(String url) throws TempLinkNotFoundException {
         try {
             BufferedReader br = new BufferedReader(new FileReader(pluginPath + "templinks.txt"));
             while (br.ready()) {
                 String cLine = br.readLine();
                 if (cLine.split(";")[0].equalsIgnoreCase(url))
-                    return Integer.parseInt(cLine.split(";")[1]);
+                    return cLine.split(";")[1];
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -78,7 +77,7 @@ public class LinkManager {
     public boolean verifyLink(String url) {
 
         try {
-            if (!webCrawler.getPageElement(PageElement.SUMMARY, url).toString().contains(Integer.toString(getPin(url))))
+            if (!webCrawler.getPageElement(PageElement.SUMMARY, url).toString().contains(getPin(url)))
                 return false;
         } catch (TempLinkNotFoundException e) {
             e.printStackTrace();

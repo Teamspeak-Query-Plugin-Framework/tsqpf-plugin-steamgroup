@@ -1,4 +1,4 @@
-package net.vortexdata.tsqpf_plugin_steamgroup;
+package net.vortexdata.tsqpf_plugin_steamgroup.modules;
 
 import java.io.*;
 import java.util.ArrayList;

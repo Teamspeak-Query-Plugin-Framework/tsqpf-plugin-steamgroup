@@ -2,7 +2,7 @@ package net.vortexdata.tsqpf_plugin_steamgroup;
 
 import net.vortexdata.tsqpf.plugins.TeamspeakPlugin;
 import net.vortexdata.tsqpf_plugin_steamgroup.commands.chat.CSteamGroup;
-import sun.awt.image.ImageWatched;
+import net.vortexdata.tsqpf_plugin_steamgroup.modules.*;
 
 public class Main extends TeamspeakPlugin {
 
@@ -22,7 +22,7 @@ public class Main extends TeamspeakPlugin {
         getConfig().setDefault("messageSyntax", "!steamgroup <guide | pin | link | unlink>");
         getConfig().saveAll();
 
-        registerChatCommand(new CSteamGroup(getAPI(), getConfig()), "!steamgroup");
+        registerChatCommand(new CSteamGroup(getAPI(), getConfig(), linkManager), "!steamgroup");
 
         linkManager = new LinkManager(getConfig().readValue("steamGroupUrl"));
 
