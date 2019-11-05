@@ -10,7 +10,7 @@ public class LinkManager {
     Thread linkRemoverTask;
 
     public LinkManager() {
-        linkRemoverTask = new Thread(new TempLinkRemoverThread());
+        linkRemoverTask = new Thread(new TempLinkRemoverThread(pluginPath));
         linkRemoverTask.start();
     }
 
