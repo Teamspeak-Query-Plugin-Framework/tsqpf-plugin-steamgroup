@@ -3,7 +3,7 @@ package net.vortexdata.tsqpf_plugin_steamgroup.commands.chat;
 import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.api.event.TextMessageEvent;
 import net.vortexdata.tsqpf.listeners.ChatCommandInterface;
-import net.vortexdata.tsqpf.plugins.PluginConfig;
+import net.vortexdata.tsqpf.plugins.*;
 import net.vortexdata.tsqpf_plugin_steamgroup.modules.*;
 import net.vortexdata.tsqpf_plugin_steamgroup.utils.*;
 import sun.net.util.*;
@@ -16,12 +16,16 @@ public class CSteamGroup implements ChatCommandInterface {
     private PluginConfig config;
     private LinkManager linkManager;
     private PinGenerator pinGenerator;
+    private UrlValidator urlValidator;
+    private PluginLogger logger;
 
-    public CSteamGroup(TS3Api api, PluginConfig config, LinkManager linkManager) {
+    public CSteamGroup(TS3Api api, PluginConfig config, LinkManager linkManager, PluginLogger logger) {
         this.api = api;
         this.config = config;
         this.linkManager = linkManager;
         this.pinGenerator = new PinGenerator();
+        this.urlValidator = new UrlValidator();
+        this.logger = logger;
     }
 
     @Override
@@ -39,16 +43,34 @@ public class CSteamGroup implements ChatCommandInterface {
                 if (command.length >= 3) {
 
                     // Check if URL is valid
+                    if (!urlValidator.validateProfileUrl(command[2])) {
+                        api.sendPrivateMessage(invokerId, config.readValue("messageLinkUrlInvalid"));
+                        return;
+                    }
+
+                    String pin = pinGenerator.nextPin();
+                    linkManager.storeLink(command[2], pin);
+                    api.sendPrivateMessage(invokerId, config.readValue("messagePinCreated") + pin);
+
 
                 } else {
                     api.sendPrivateMessage(invokerId, config.readValue("messageSyntax"));
                 }
 
-
                 String pin = pinGenerator.nextPin();
                 linkManager.storeLink(command[2], pin);
 
             } else if (command[1].equalsIgnoreCase("VERIFY")) {
+
+                if (command.length >= 3) {
+
+                    new Thread(new LinkCreationCheck(command));
+
+
+
+                } else {
+                    api.sendPrivateMessage(invokerId, config.readValue("messageSyntax"));
+                }
 
             } else if (command[1].equalsIgnoreCase("UNLINK")) {
 
