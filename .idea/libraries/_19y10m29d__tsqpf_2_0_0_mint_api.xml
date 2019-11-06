@@ -2,6 +2,8 @@
   <library name="[19y10m29d] tsqpf-2.0.0-mint-api">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/libs/[19y10m29d] tsqpf-2.0.0-mint-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/jsoup-1.12.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/junit-4.13-rc-1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
