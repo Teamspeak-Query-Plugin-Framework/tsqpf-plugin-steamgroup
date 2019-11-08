@@ -9,8 +9,6 @@ public class UrlValidator {
         // Remove any special chars
         url = url.replace(" ", "");
         url = url.replace("\n", "");
-        url = url.replace("[URL]", "");
-        url = url.replace("[/URL]", "");
 
 
         try {
