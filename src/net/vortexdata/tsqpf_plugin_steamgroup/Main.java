@@ -28,6 +28,8 @@ public class Main extends TeamspeakPlugin {
         getConfig().saveAll();
 
         try {
+            if (Integer.parseInt(getConfig().readValue("tempLinkRemoveIntervalInSeconds")) < 120)
+                getLogger().printWarn("Config key tempLinkRemoveIntervalInSeconds is set to be lower than 120 seconds, which can make it hard for some users to verify their account before the temporary link gets removed again.");
             linkManager = new LinkManager(getConfig().readValue("steamGroupUrl"), getLogger(), Integer.parseInt(getConfig().readValue("tempLinkRemoveIntervalInSeconds")));
             registerChatCommand(new CSteamGroup(getAPI(), getConfig(), linkManager, getLogger()), "!steamgroup");
         } catch (NumberFormatException e) {
