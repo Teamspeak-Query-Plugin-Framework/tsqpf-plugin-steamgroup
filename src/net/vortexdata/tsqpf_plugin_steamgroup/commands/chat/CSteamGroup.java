@@ -58,9 +58,6 @@ public class CSteamGroup implements ChatCommandInterface {
                     api.sendPrivateMessage(invokerId, config.readValue("messageSyntax"));
                 }
 
-                String pin = pinGenerator.nextPin();
-                linkManager.storeLink(command[2], pin);
-
             } else if (command[1].equalsIgnoreCase("VERIFY")) {
 
                 if (command.length >= 3) {
@@ -73,6 +70,8 @@ public class CSteamGroup implements ChatCommandInterface {
 
             } else if (command[1].equalsIgnoreCase("UNLINK")) {
 
+            } else {
+                api.sendPrivateMessage(invokerId, config.readValue("messageSyntax"));
             }
 
         } else {
