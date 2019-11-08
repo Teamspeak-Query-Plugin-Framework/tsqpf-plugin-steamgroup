@@ -5,6 +5,11 @@ import java.net.*;
 public class UrlValidator {
 
     public boolean validateProfileUrl(String url) {
+
+        // Remove any special chars
+        url = url.replace(" ", "");
+        url = url.replace("\n", "");
+
         try {
             URL cUrl = new URL(url);
 
