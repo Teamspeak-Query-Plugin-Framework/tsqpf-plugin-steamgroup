@@ -43,7 +43,7 @@ public class CSteamGroup implements ChatCommandInterface {
                 if (command.length >= 3) {
 
                     // Check if URL is valid
-                    if (!urlValidator.validateProfileUrl(command[2])) {
+                    if (!urlValidator.validateProfileUrl(command[3])) {
                         api.sendPrivateMessage(invokerId, config.readValue("messageLinkUrlInvalid"));
 
                         return;
