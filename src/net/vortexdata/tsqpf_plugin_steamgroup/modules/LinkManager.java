@@ -18,6 +18,14 @@ public class LinkManager {
         linkRemoverTask.start();
         this.groupUrl = groupUrl;
         this.webCrawler = new WebCrawler();
+
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(pluginPath + "templinks.txt", false));
+            bw.write("");
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public LinkManager(String groupUrl, int customTempLinkRemoverInterval) {
@@ -25,6 +33,14 @@ public class LinkManager {
         linkRemoverTask.start();
         this.groupUrl = groupUrl;
         this.webCrawler = new WebCrawler();
+
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(pluginPath + "templinks.txt", false));
+            bw.write("");
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean storeLink(String url, String pin) {
