@@ -41,7 +41,7 @@ public class LinkCreationCheck implements Runnable {
             try {
                 api.addClientToServerGroup(Integer.parseInt(config.readValue("linkGroupId")), invokerId);
                 api.sendPrivateMessage(invokerId, config.readValue("messageLinkCreated"));
-                linkManager.
+                linkManager.removeLink(command[2]);
             } catch (Exception e) {
                 api.sendPrivateMessage(invokerId, config.readValue("messageUnknownError"));
                 logger.printWarn("Link server group was not found. Please check your config.");
