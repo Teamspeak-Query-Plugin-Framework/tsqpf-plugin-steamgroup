@@ -17,7 +17,7 @@ public class TempLinkRemoverThread implements Runnable {
 
     public TempLinkRemoverThread(String path, LinkManager linkManager) {
         this.path = path;
-        this.sleep = 60000;
+        this.sleep = 600;
         this.linkManager = linkManager;
     }
 
@@ -25,7 +25,7 @@ public class TempLinkRemoverThread implements Runnable {
     public void run() {
 
         try {
-            Thread.sleep(sleep);
+            Thread.sleep(sleep * 1000);
         } catch (InterruptedException e) {
 
         }
@@ -45,18 +45,14 @@ public class TempLinkRemoverThread implements Runnable {
                     break;
 
                 String[] link = currentLine.split(";");
-                if (Long.parseLong(link[2]) < System.currentTimeMillis() - 5000) {
-                    System.out.println("Skipped line");
-                } else {
+                if (Long.parseLong(link[2]) > System.currentTimeMillis() - sleep) {
                     validLinks.add(currentLine);
-                    System.out.println("Saved line");
                 }
             }
 
             BufferedWriter bwr = new BufferedWriter(new FileWriter(path + "templinks.txt"));
             bwr.write("");
             for (String line : validLinks) {
-                System.out.println("Writing line");
                 bw.write(line);
             }
 
@@ -66,10 +62,6 @@ public class TempLinkRemoverThread implements Runnable {
             e.printStackTrace();
         }
 
-    }
-
-    public void setSleep(int milliseconds) {
-        this.sleep = milliseconds;
     }
 
 }
