@@ -67,7 +67,7 @@ public class CSteamGroup implements ChatCommandInterface {
                             String pin = new RandomString().nextString();
                             linkManager.storeLink(command[2], pin);
                             api.sendPrivateMessage(invokerId, config.readValue("messagePinCreated") + pin);
-
+                            logger.printDebug("Temporary link created for user " + textMessageEvent.getInvokerName() + ".");
                         }
                     }
 

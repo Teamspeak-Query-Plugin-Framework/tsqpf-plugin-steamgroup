@@ -29,7 +29,8 @@ public class LinkCreationCheck implements Runnable {
     @Override
     public void run() {
 
-        // TODO: Add a task run confirmation message
+        // Send message to client
+        api.sendPrivateMessage(invokerId, config.readValue("messageLinkClientVerificationRunning"));
 
         // Check if URL is valid
         if (!urlValidator.validateProfileUrl(command[2])) {
