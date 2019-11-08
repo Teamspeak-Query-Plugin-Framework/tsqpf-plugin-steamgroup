@@ -2,6 +2,7 @@ package net.vortexdata.tsqpf_plugin_steamgroup.modules;
 
 import com.github.theholywaffle.teamspeak3.*;
 import net.vortexdata.tsqpf.plugins.*;
+import net.vortexdata.tsqpf_plugin_steamgroup.exceptions.*;
 import net.vortexdata.tsqpf_plugin_steamgroup.utils.*;
 
 public class LinkCreationCheck implements Runnable {
@@ -31,6 +32,13 @@ public class LinkCreationCheck implements Runnable {
 
         // Send message to client
         api.sendPrivateMessage(invokerId, config.readValue("messageLinkClientVerificationRunning"));
+
+        try {
+            linkManager.getPin(command[2]);
+        } catch (TempLinkNotFoundException e) {
+            api.sendPrivateMessage(invokerId, config.readValue("messageLinkMissing"));
+            return;
+        }
 
         // Check if URL is valid
         if (!urlValidator.validateProfileUrl(command[2])) {
