@@ -53,16 +53,24 @@ public class TempLinkRemoverThread implements Runnable {
                         break;
 
                     String[] link = currentLine.split(";");
-                    if (Long.parseLong(link[2]) > System.currentTimeMillis() - sleep * 1000) {
-                        validLinks.add(currentLine);
+                    if (Long.parseLong(link[2]) > System.currentTimeMillis() - (sleep * 1000)) {
+                        if (!currentLine.endsWith("\n"))
+                            validLinks.add(currentLine + "\n");
+                        else
+                            validLinks.add(currentLine);
                     }
                 }
 
+                logger.printDebug(validLinks.size() + " temporary links saved.");
                 BufferedWriter bwr = new BufferedWriter(new FileWriter(path + "templinks.txt"));
                 bwr.write("");
+                bwr.flush();
+                bwr.close();
                 for (String line : validLinks) {
                     bw.write(line);
+                    bw.flush();
                 }
+                bw.close();
 
             } catch (FileNotFoundException e) {
                 logger.printWarn("Temporary link collection file not found, please check your file write permissions.");
