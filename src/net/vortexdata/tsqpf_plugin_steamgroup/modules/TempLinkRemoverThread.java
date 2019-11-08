@@ -53,7 +53,7 @@ public class TempLinkRemoverThread implements Runnable {
                         break;
 
                     String[] link = currentLine.split(";");
-                    if (Long.parseLong(link[2]) > System.currentTimeMillis() - sleep) {
+                    if (Long.parseLong(link[2]) > System.currentTimeMillis() - sleep * 1000) {
                         validLinks.add(currentLine);
                     }
                 }
