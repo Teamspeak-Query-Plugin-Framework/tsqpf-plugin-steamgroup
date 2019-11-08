@@ -4,6 +4,7 @@ import com.github.theholywaffle.teamspeak3.TS3Api;
 import com.github.theholywaffle.teamspeak3.api.event.TextMessageEvent;
 import net.vortexdata.tsqpf.listeners.ChatCommandInterface;
 import net.vortexdata.tsqpf.plugins.*;
+import net.vortexdata.tsqpf.utils.*;
 import net.vortexdata.tsqpf_plugin_steamgroup.exceptions.*;
 import net.vortexdata.tsqpf_plugin_steamgroup.modules.*;
 import net.vortexdata.tsqpf_plugin_steamgroup.utils.*;
@@ -62,11 +63,13 @@ public class CSteamGroup implements ChatCommandInterface {
                             api.sendPrivateMessage(invokerId, config.readValue("messageLinkClientLinkedNeedsVerification") + pin);
                             return;
                         } catch (TempLinkNotFoundException e) {
-                            // Ignore and proceed with pin creation
+
+                            String pin = new RandomString().nextString();
+                            linkManager.storeLink(command[2], pin);
+                            api.sendPrivateMessage(invokerId, config.readValue("messagePinCreated") + pin);
+
                         }
                     }
-                    linkManager.storeLink(command[2], pin);
-                    api.sendPrivateMessage(invokerId, config.readValue("messagePinCreated") + pin);
 
 
                 } else {
