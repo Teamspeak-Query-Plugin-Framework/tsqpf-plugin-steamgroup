@@ -1,5 +1,6 @@
 package net.vortexdata.tsqpf_plugin_steamgroup.modules;
 
+import net.vortexdata.tsqpf.plugins.*;
 import net.vortexdata.tsqpf_plugin_steamgroup.exceptions.*;
 import net.vortexdata.tsqpf_plugin_steamgroup.webutils.*;
 
@@ -14,8 +15,8 @@ public class LinkManager {
     private WebCrawler webCrawler;
     private String steamGroupUrl;
 
-    public LinkManager(String groupUrl) {
-        linkRemoverTask = new Thread(new TempLinkRemoverThread(pluginPath, this));
+    public LinkManager(String groupUrl, PluginLogger logger) {
+        linkRemoverTask = new Thread(new TempLinkRemoverThread(pluginPath, this, logger));
         linkRemoverTask.start();
         this.groupUrl = groupUrl;
         this.webCrawler = new WebCrawler();
@@ -29,8 +30,8 @@ public class LinkManager {
         }
     }
 
-    public LinkManager(String groupUrl, int customTempLinkRemoverInterval) {
-        linkRemoverTask = new Thread(new TempLinkRemoverThread(pluginPath, this, customTempLinkRemoverInterval));
+    public LinkManager(String groupUrl, PluginLogger logger, int customTempLinkRemoverInterval) {
+        linkRemoverTask = new Thread(new TempLinkRemoverThread(pluginPath, this, logger, customTempLinkRemoverInterval));
         linkRemoverTask.start();
         this.groupUrl = groupUrl;
         this.webCrawler = new WebCrawler();

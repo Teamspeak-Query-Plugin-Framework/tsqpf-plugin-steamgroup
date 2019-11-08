@@ -28,7 +28,7 @@ public class Main extends TeamspeakPlugin {
         getConfig().saveAll();
 
         try {
-            linkManager = new LinkManager(getConfig().readValue("steamGroupUrl"), Integer.parseInt(getConfig().readValue("tempLinkRemoveIntervalInSeconds")));
+            linkManager = new LinkManager(getConfig().readValue("steamGroupUrl"), getLogger(), Integer.parseInt(getConfig().readValue("tempLinkRemoveIntervalInSeconds")));
             registerChatCommand(new CSteamGroup(getAPI(), getConfig(), linkManager, getLogger()), "!steamgroup");
         } catch (NumberFormatException e) {
             getLogger().printError("Failed to parse tempLinkRemoveIntervalInSeconds config value. Please check your config.");
