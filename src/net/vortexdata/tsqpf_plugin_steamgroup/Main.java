@@ -21,6 +21,7 @@ public class Main extends TeamspeakPlugin {
         getConfig().setDefault("messagePinCreated", "Your verification pin has been created. Please paste it in to your Steam profiles summary box and proceed with the verification in the next 10 minutes before the PIN gets invalidated. Your pin is: ");
         getConfig().setDefault("messageGuide", "First run '!steamgroup link <STEAM_PROFILE_URL>'. This will generate a PIN which you have to paste in to your Steam profiles info box. After you have done that, run '!steamgroup verify <YOUR_STEAM_URL>'. If you've followed all steps your account should now be linked.");
         getConfig().setDefault("messageSyntax", "!steamgroup <guide | pin | link | unlink>");
+        getConfig().setDefault("messageLinkClientAlreadyLinked", "Sorry, but your account seems to be already linked.");
         getConfig().setDefault("messageUnknownError", "An unknown error has occurred. Please contact the server administrator and tell them about this issue.");
         getConfig().saveAll();
 

@@ -42,6 +42,11 @@ public class CSteamGroup implements ChatCommandInterface {
 
                 if (command.length >= 3) {
 
+                    if (api.getClientByUId(textMessageEvent.getInvokerUniqueId()).isInServerGroup(Integer.parseInt(config.readValue("linkGroupId")))) {
+                        api.sendPrivateMessage(invokerId, config.readValue("messageLinkClientAlreadyLinked"));
+                        return;
+                    }
+
                     // Remove teamspeak URL tags
                     command[2] = command[2].replace("[URL]", "");
                     command[2] = command[2].replace("[/URL]", "");
