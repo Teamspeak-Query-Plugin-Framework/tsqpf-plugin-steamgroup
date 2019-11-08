@@ -4,6 +4,7 @@ import net.vortexdata.tsqpf_plugin_steamgroup.exceptions.*;
 import net.vortexdata.tsqpf_plugin_steamgroup.webutils.*;
 
 import java.io.*;
+import java.util.*;
 
 public class LinkManager {
 
@@ -14,7 +15,7 @@ public class LinkManager {
     private String steamGroupUrl;
 
     public LinkManager(String groupUrl) {
-        linkRemoverTask = new Thread(new TempLinkRemoverThread(pluginPath));
+        linkRemoverTask = new Thread(new TempLinkRemoverThread(pluginPath, this));
         linkRemoverTask.start();
         this.groupUrl = groupUrl;
         this.webCrawler = new WebCrawler();
@@ -29,7 +30,7 @@ public class LinkManager {
     }
 
     public LinkManager(String groupUrl, int customTempLinkRemoverInterval) {
-        linkRemoverTask = new Thread(new TempLinkRemoverThread(pluginPath, customTempLinkRemoverInterval));
+        linkRemoverTask = new Thread(new TempLinkRemoverThread(pluginPath, this, customTempLinkRemoverInterval));
         linkRemoverTask.start();
         this.groupUrl = groupUrl;
         this.webCrawler = new WebCrawler();
@@ -41,6 +42,45 @@ public class LinkManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean removeLink(String url) {
+        BufferedReader br = null;
+        BufferedWriter bw = null;
+        ArrayList<String> validLinks = new ArrayList<>();
+
+        try {
+            br = new BufferedReader(new FileReader(pluginPath + "templinks.txt"));
+            bw = new BufferedWriter(new FileWriter(pluginPath + "templinks.txt", true));
+
+            String currentLine = "default";
+            while (currentLine != null && !currentLine.isEmpty()) {
+                currentLine = br.readLine();
+                if (currentLine == null || currentLine.isEmpty())
+                    break;
+
+                String[] link = currentLine.split(";");
+                if (link[0].equalsIgnoreCase(url)) {
+                    // Skip line
+                } else {
+                    validLinks.add(currentLine);
+                }
+            }
+
+            BufferedWriter bwr = new BufferedWriter(new FileWriter(pluginPath + "templinks.txt"));
+            bwr.write("");
+            for (String line : validLinks) {
+                System.out.println("Writing line");
+                bw.write(line);
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
     }
 
     public boolean storeLink(String url, String pin) {

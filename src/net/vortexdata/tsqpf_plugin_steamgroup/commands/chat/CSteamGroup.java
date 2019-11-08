@@ -70,7 +70,9 @@ public class CSteamGroup implements ChatCommandInterface {
                     command[2] = command[2].replace("[URL]", "");
                     command[2] = command[2].replace("[/URL]", "");
 
-                    new Thread(new LinkCreationCheck(command, api, invokerId, config, linkManager, logger)).start();
+                    textMessageEvent.getInvokerUniqueId();
+
+                    new Thread(new LinkCreationCheck(command, api, textMessageEvent.getInvokerUniqueId(), invokerId, config, linkManager, logger)).start();
 
                 } else {
                     api.sendPrivateMessage(invokerId, config.readValue("messageSyntax"));

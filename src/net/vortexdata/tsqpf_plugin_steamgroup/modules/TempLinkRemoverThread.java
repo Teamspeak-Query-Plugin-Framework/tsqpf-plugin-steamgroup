@@ -5,17 +5,20 @@ import java.util.ArrayList;
 
 public class TempLinkRemoverThread implements Runnable {
 
-    String path;
+    private String path;
     private int sleep;
+    private LinkManager linkManager;
 
-    public TempLinkRemoverThread(String path, int interval) {
+    public TempLinkRemoverThread(String path, LinkManager linkManager, int interval) {
         this.path = path;
         this.sleep = interval;
+        this.linkManager = linkManager;
     }
 
-    public TempLinkRemoverThread(String path) {
+    public TempLinkRemoverThread(String path, LinkManager linkManager) {
         this.path = path;
         this.sleep = 60000;
+        this.linkManager = linkManager;
     }
 
     @Override
