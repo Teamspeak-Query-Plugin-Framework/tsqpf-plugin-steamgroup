@@ -25,7 +25,7 @@ public class Main extends TeamspeakPlugin {
         getConfig().setDefault("messageSyntax", "!steamgroup <guide | link | unlink>");
         getConfig().setDefault("messageLinkClientAlreadyLinked", "Sorry, but your account seems to be linked already.");
         getConfig().setDefault("messageLinkClientVerificationRunning", "Verifying Steam link... Please wait. This can take a few seconds.");
-        getConfig().setDefault("messageLinkClientLinkedNeedsVerification", "Sorry, but your account is already awaiting verification. Please use this pin: ");
+        getConfig().setDefault("messageLinkClientLinkedNeedsVerification", "Sorry, but your account is already awaiting verification. If you've lost your pin, please wait 10 minutes until it gets automatically invalidated and try again.");
         getConfig().setDefault("messageUnknownError", "An unknown error has occurred. Please contact the server administrator and tell them about this issue.");
         getConfig().saveAll();
 

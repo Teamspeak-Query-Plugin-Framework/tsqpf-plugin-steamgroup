@@ -60,7 +60,7 @@ public class CSteamGroup implements ChatCommandInterface {
                     } else {
                         try {
                             String pin = linkManager.getPin(command[2]);
-                            api.sendPrivateMessage(invokerId, config.readValue("messageLinkClientLinkedNeedsVerification") + pin);
+                            api.sendPrivateMessage(invokerId, config.readValue("messageLinkClientLinkedNeedsVerification"));
                             return;
                         } catch (TempLinkNotFoundException e) {
 
