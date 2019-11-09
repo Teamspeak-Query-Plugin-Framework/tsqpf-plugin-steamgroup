@@ -95,10 +95,10 @@ public class CSteamGroup implements ChatCommandInterface {
             } else if (command[1].equalsIgnoreCase("UNLINK")) {
 
                 try {
-                    api.removeClientFromServerGroup(invokerId, Integer.parseInt(config.readValue("linkGroupId")));
+                    api.removeClientFromServerGroup(Integer.parseInt(config.readValue("linkGroupId")), api.getClientByUId(textMessageEvent.getInvokerUniqueId()).getDatabaseId());
                     api.sendPrivateMessage(invokerId, config.readValue("messageLinkRemoved"));
                 } catch (Exception e) {
-                    logger.printError("Failed to unlink client " + textMessageEvent.getInvokerName() + ". Please check your config (linkGroupId).");
+                    logger.printError("Failed to unlink client " + textMessageEvent.getInvokerName() + ", dumping error information: " + e.getMessage());
                     api.sendPrivateMessage(invokerId, config.readValue("messageUnknownError"));
                 }
 
