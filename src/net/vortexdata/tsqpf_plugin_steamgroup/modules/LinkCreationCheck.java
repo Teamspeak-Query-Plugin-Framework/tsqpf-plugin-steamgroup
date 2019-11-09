@@ -48,13 +48,13 @@ public class LinkCreationCheck implements Runnable {
 
         if (linkManager.verifyLink(command[2])) {
             try {
-                api.addClientToServerGroup(Integer.parseInt(config.readValue("linkGroupId")), invokerId);
+                api.addClientToServerGroup(Integer.parseInt(config.readValue("linkGroupId")), api.getClientByUId(invokerUid).getDatabaseId());
                 api.sendPrivateMessage(invokerId, config.readValue("messageLinkCreated"));
                 linkManager.removeLink(command[2]);
                 logger.printDebug("Verification for user " + api.getClientByUId(invokerUid).getLoginName() + " completed successfully.");
             } catch (Exception e) {
                 api.sendPrivateMessage(invokerId, config.readValue("messageUnknownError"));
-                logger.printWarn("Link server group was not found. Please check your config.");
+                logger.printWarn("Failed to assign Steam server group, dumping error details: " + e.getMessage());
             }
         } else {
             api.sendPrivateMessage(invokerId, config.readValue("messageLinkClientNotVerified"));
