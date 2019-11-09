@@ -94,6 +94,11 @@ public class CSteamGroup implements ChatCommandInterface {
 
             } else if (command[1].equalsIgnoreCase("UNLINK")) {
 
+                if (!api.getClientByUId(textMessageEvent.getInvokerUniqueId()).isInServerGroup(Integer.parseInt(config.readValue("linkGroupId")))) {
+                    api.sendPrivateMessage(invokerId, config.readValue("messageLinkRemovedFailedNoLink"));
+                    return;
+                }
+
                 try {
                     api.removeClientFromServerGroup(Integer.parseInt(config.readValue("linkGroupId")), api.getClientByUId(textMessageEvent.getInvokerUniqueId()).getDatabaseId());
                     api.sendPrivateMessage(invokerId, config.readValue("messageLinkRemoved"));

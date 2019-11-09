@@ -19,6 +19,7 @@ public class Main extends TeamspeakPlugin {
         getConfig().setDefault("messageLinkClientNotVerified", "Sorry, but I couldn't verify that this account belongs to you. Please check your pin for any typos and try again. For more information, use the command '!steamgroup guide'.");
         getConfig().setDefault("messageLinkMissing", "Sorry, but this Steam account has not been linked before validating. Please first create one and then proceed to validate it.");
         getConfig().setDefault("messageLinkRemoved", "Your account has been successfully unlinked.");
+        getConfig().setDefault("messageLinkRemovedFailedNoLink", "Your account is not linked to any Steam account.");
         getConfig().setDefault("messagePinCreated", "Your verification pin has been created. Please paste it in to your Steam profiles summary box and proceed with the verification in the next 10 minutes before the pin gets invalidated. Your pin is: ");
         getConfig().setDefault("messageGuide", "First run '!steamgroup link <STEAM_PROFILE_URL>'. This will generate a pin which you have to paste in to your Steam profiles info box. After you have done that, run '!steamgroup verify <STEAM_PROFILE_URL>'. If you've followed all steps your account should now be linked.");
         getConfig().setDefault("messageSyntax", "!steamgroup <guide | link | unlink>");
