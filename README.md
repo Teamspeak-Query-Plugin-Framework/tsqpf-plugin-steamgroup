@@ -31,9 +31,9 @@ KEY | DATATYPE | DESCRIPTION
 
 ## 📁 Directory Tree
 
-SteamGroup/
-├── templinks.txt
-└── plugin.conf
+SteamGroup/<br>
+├── templinks.txt<br>
+└── plugin.conf<br>
 
 ## 📜 Vortexdata Certification
 
