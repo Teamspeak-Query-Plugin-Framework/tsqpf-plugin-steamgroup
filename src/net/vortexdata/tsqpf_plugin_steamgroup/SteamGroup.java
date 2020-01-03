@@ -4,7 +4,7 @@ import net.vortexdata.tsqpf.plugins.TeamspeakPlugin;
 import net.vortexdata.tsqpf_plugin_steamgroup.commands.chat.CSteamGroup;
 import net.vortexdata.tsqpf_plugin_steamgroup.modules.*;
 
-public class Main extends TeamspeakPlugin {
+public class SteamGroup extends TeamspeakPlugin {
 
     private LinkManager linkManager;
 
@@ -43,8 +43,6 @@ public class Main extends TeamspeakPlugin {
 
     @Override
     public void onDisable() {
-
-        linkManager = null;
 
     }
 
